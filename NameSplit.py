@@ -1,10 +1,15 @@
 import re
 
 import pypyodbc
+#using timer for performance testing of the solution
+from timeit import default_timer as timer
+
+
 
 
 
 def main():
+    start = timer()
     name_list = get_name_list()
 
     for name_dict in name_list:
@@ -48,6 +53,8 @@ def main():
 
         update_name(name_dict)
 
+    end = timer()
+    print(end-start) # time in seconds this took to run
 
 def update_name(name_dict):
     theargs = [name_dict["phx_name_first"], name_dict["phx_name_mid"], name_dict["phx_name_last"],
