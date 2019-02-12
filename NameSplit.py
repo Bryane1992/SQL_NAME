@@ -8,11 +8,18 @@ def main():
     name_list = get_name_list()
 
     for name_dict in name_list:
+
         print("".join(["working on:", name_dict["phx_name_full"]]))
-
-        phx_last_name = re.search("([^,]+)", name_dict["phx_name_full"])
-
-        name_dict["phx_name_last"] = phx_last_name.group(1)
+        # Regex captures group 1 and any char not in [,] one or more times
+        # phx_last_name = re.search("([^,]+)", name_dict["phx_name_full"])
+        # The problem when trying to do it like this is when there is a missing piece of the name it is out of index
+        phx_first_name = re.findall(r"[A-Z]+", name_dict["phx_name_full"])
+        print("".join(["Last Name: ", phx_first_name[0]]))
+        print("".join(["first name: ", phx_first_name[1]]))
+        print("".join(["Middle name: ", phx_first_name[2]]))
+        name_dict["phx_name_last"] = phx_first_name[0]
+        name_dict["phx_name_first"] = phx_first_name[1]
+        name_dict["phx_name_mid"] = phx_first_name[2]
 
         '''
 
